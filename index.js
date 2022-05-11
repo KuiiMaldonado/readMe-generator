@@ -35,6 +35,12 @@ const questions = [
         name: 'tests',
         message: 'Does your project have any tests?',
     },
+    {
+        type: 'list',
+        message: 'Choose a license for your project',
+        name: 'license',
+        choices: ['MITLicense', 'Unlicense', 'MozillaPublicLicense2.0', 'ApacheLicense2.0', 'No License'],
+    },
 ];
 
 // TODO: Create a function to write README file
