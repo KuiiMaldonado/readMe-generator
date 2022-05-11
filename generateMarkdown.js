@@ -631,70 +631,47 @@ function renderLicenseBadge(license) {
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license) {
-    let link;
-
-    switch (license) {
-        case 'MITLicense': link = "https://lbesson.mit-license.org/";
-            break;
-        case 'Unlicense': link = "https://unlicense.org/";
-            break;
-        case 'MozillaPublicLicense2.0': link = "http://mozilla.org/MPL/2.0/";
-            break;
-        case 'ApacheLicense2.0': link = "http://www.apache.org/licenses/LICENSE-2.0";
-            break;
-        case 'No License': link = "";
-            break;
-    }
-
-    return link;
-}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
-  let licenseSection;
-
-    switch (license) {
-        case 'MITLicense': licenseSection = MITLicense;
-            break;
-        case 'Unlicense': licenseSection = Unlicense;
-            break;
-        case 'MozillaPublicLicense2.0': licenseSection = MozillaLicense;
-            break;
-        case 'ApacheLicense2.0': licenseSection = apacheLicense;
-            break;
-        case 'No License': licenseSection = "";
-            break;
-    }
-    return licenseSection;
-}
-
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
 
-  let badge = renderLicenseBadge(data.license);
-  let link = renderLicenseLink(data.license);
-  let licenseSection = renderLicenseSection(data.license);
-  let badgeString;
-  let licenseString;
+    let badge = renderLicenseBadge(data.license);
+    let link = renderLicenseLink(data.license);
+    let licenseSection = renderLicenseSection(data.license);
+    let badgeString;
+    let licenseString;
+    let licenseContentTable = '';
 
-  if (badge !== '' && link !== '')
-      badgeString = `[![${data.license}](${badge})](${link})`;
-  else
-      badgeString = '';
+    if (badge !== '' && link !== '')
+        badgeString = `[![${data.license}](${badge})](${link})`;
+    else
+        badgeString = '';
 
-    if (licenseSection !== '')
+    if (licenseSection !== '') {
         licenseString = `## License
 ${licenseSection}`;
+        licenseContentTable = `* [License](#License)`;
+    }
     else
         licenseString = '';
 
-  return `# ${data.title}
+    return `# ${data.title}
+    
+${badgeString}
+  
+## Table of Contents
+* [Description](#Description)
+
+* [Installation](#Installation)
+
+* [Usage](#Usage)
+
+* [How to contribute](#How-to-contribute)
+
+* [Tests](#Tests)
+
+${licenseContentTable}
+
 ## Description
 ${data.description}
-
-${badgeString}
 
 ## Installation
 ${data.installation}
@@ -716,5 +693,45 @@ Any questions please contact me via email: ${data.email}
 ${licenseString}
 `;
 }
+
+function renderLicenseLink(license) {
+    let link;
+
+    switch (license) {
+        case 'MITLicense': link = "https://lbesson.mit-license.org/";
+            break;
+        case 'Unlicense': link = "https://unlicense.org/";
+            break;
+        case 'MozillaPublicLicense2.0': link = "http://mozilla.org/MPL/2.0/";
+            break;
+        case 'ApacheLicense2.0': link = "http://www.apache.org/licenses/LICENSE-2.0";
+            break;
+        case 'No License': link = "";
+            break;
+    }
+
+    return link;
+}
+// TODO: Create a function that returns the license section of README
+// If there is no license, return an empty string
+
+function renderLicenseSection(license) {
+  let licenseSection;
+
+    switch (license) {
+        case 'MITLicense': licenseSection = MITLicense;
+            break;
+        case 'Unlicense': licenseSection = Unlicense;
+            break;
+        case 'MozillaPublicLicense2.0': licenseSection = MozillaLicense;
+            break;
+        case 'ApacheLicense2.0': licenseSection = apacheLicense;
+            break;
+        case 'No License': licenseSection = "";
+            break;
+    }
+    return licenseSection;
+}
+// TODO: Create a function to generate markdown for README
 
 module.exports = {generateMarkdown};
