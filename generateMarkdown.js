@@ -708,6 +708,11 @@ ${data.contributions}
 ## Tests
 ${data.tests}
 
+## Questions
+[GitHub Profile](https://github.com/${data.github})
+
+Any questions please contact me via email: ${data.email}
+
 ${licenseString}
 `;
 }
